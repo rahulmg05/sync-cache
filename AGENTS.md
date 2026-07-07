@@ -6,7 +6,7 @@ This file defines the agentic loop workflow, architectural invariants, and proje
 
 ## Agentic loop workflow
 
-Run every phase through **Claude Code in an agentic loop**: compile → checkstyle → test → fix → repeat. Do not use a chat window for implementation.
+Run every phase through **Claude Code in an agentic loop**: compile → test → fix → repeat. Do not use a chat window for implementation.
 
 For phases involving WAL recovery, crash-mid-delivery correctness, or distributed consensus, have a stronger model review the diff for race conditions and recovery edge cases before merging.
 
@@ -27,42 +27,10 @@ For phases involving WAL recovery, crash-mid-delivery correctness, or distribute
 ### Formatting and style
 
 - **Indentation:** 2 spaces. No tabs anywhere — Java source, XML, YAML, all of it.
-- **Indentation:** 2 spaces. No tabs anywhere — Java source, XML, YAML, all of it.
-- **Checkstyle** is enforced on every build via the Maven Checkstyle plugin. Config lives at `checkstyle/checkstyle.xml`. The build **must fail** on any violation — do not suppress warnings without a comment explaining why.
+- **Checkstyle** is enforced automatically on every `mvn verify` via the Maven Checkstyle plugin configured in `pom.xml`. Config lives at `checkstyle/checkstyle.xml`. The build fails on any violation.
 - **Line length:** 120 characters max.
-- **Braces:** always on the same line (K&R style). Braces are required even for single-line `if`/`for`/`while` bodies.
+- **Braces:** always on the same line (K&R style). Braces required even for single-line `if`/`for`/`while` bodies.
 - **Blank lines:** one blank line between methods; no trailing whitespace.
-
-The Maven Checkstyle plugin **must** be wired into `pom.xml` as follows so that `mvn verify` fails on violations:
-
-```xml
-<plugin>
-  <groupId>org.apache.maven.plugins</groupId>
-  <artifactId>maven-checkstyle-plugin</artifactId>
-  <version>3.3.1</version>
-  <configuration>
-    <configLocation>checkstyle/checkstyle.xml</configLocation>
-    <consoleOutput>true</consoleOutput>
-    <failsOnError>true</failsOnError>
-    <failOnViolation>true</failOnViolation>
-    <violationSeverity>error</violationSeverity>
-  </configuration>
-  <executions>
-    <execution>
-      <id>checkstyle</id>
-      <phase>verify</phase>
-      <goals>
-        <goal>check</goal>
-      </goals>
-    </execution>
-  </executions>
-</plugin>
-```
-
-Run checkstyle manually:
-```bash
-mvn checkstyle:check
-```
 
 ### Java conventions
 
@@ -126,7 +94,6 @@ src/main/java/io/synccache/
 
 ```bash
 mvn compile            # compile
-mvn checkstyle:check   # lint only
 mvn test               # run all tests
 mvn verify             # compile + checkstyle + test (run this before committing)
 mvn package -q         # build fat jar → target/sync-cache.jar

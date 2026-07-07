@@ -67,8 +67,8 @@ redis-cli -p 6379 GET user:1
 | Limit | Default |
 |-------|---------|
 | Max keys | 10,000,000 |
-| Max key size | 512 bytes |
-| Max value size | 512 MB |
+| Max key size | 256 bytes |
+| Max value size | 1 MB |
 | Fsync policy | `everysec` |
 | Eviction policy | `noeviction` |
 
