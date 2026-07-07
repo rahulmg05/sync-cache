@@ -88,6 +88,10 @@ src/main/java/io/synccache/
 - No compiler warnings suppressed with `@SuppressWarnings` without a comment explaining why.
 - Dependencies added to `pom.xml` must be justified; prefer the Java standard library.
 
+### Commits
+
+- The sole author and committer is rahul ☕ (rahulmg05@gmail.com). Never add `Co-Authored-By` trailers or any Claude attribution to commit messages.
+
 ---
 
 ## Build commands
