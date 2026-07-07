@@ -71,7 +71,7 @@ Keys are UTF-8 strings on the wire. Integers and UUIDs are string encodings of t
 
 | Constraint | Default | Configurable |
 |---|---|---|
-| Maximum key length | 512 bytes | Yes |
+| Maximum key length | 256 bytes | Yes |
 | Maximum number of keys in the store | 10,000,000 | Yes |
 | Allowed key characters | Any valid UTF-8 | No |
 | Float keys | Not supported | No |
@@ -92,11 +92,11 @@ Every key maps to a typed value. The five supported types, in order of introduct
 
 | Constraint | Default | Configurable | Phase |
 |---|---|---|---|
-| Maximum string/blob value size | 512 MB | Yes | Phase 1 |
+| Maximum string/blob value size | 1 MB | Yes | Phase 1 |
 | Maximum list length | 2^32 − 1 elements | Yes | Phase 2 |
 | Maximum set cardinality | 2^32 − 1 members | Yes | Phase 2 |
 | Maximum map field count | 2^32 − 1 fields | Yes | Phase 2 |
-| Maximum individual field value size (map) | 512 MB | Yes | Phase 2 |
+| Maximum individual field value size (map) | 1 MB | Yes | Phase 2 |
 
 ### TTL
 
