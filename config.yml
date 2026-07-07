@@ -1,0 +1,4 @@
+port: 6379
+max-keys: 10000000
+max-key-size: 512        # bytes
+max-value-size: 536870912  # 512 MB in bytes
